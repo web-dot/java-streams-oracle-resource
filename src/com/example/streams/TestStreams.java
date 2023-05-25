@@ -63,5 +63,26 @@ public class TestStreams {
 		.collect(Collectors.toList());
 		System.out.println(evenNumbers);
 		
+		// map
+		List<Integer> squaredNumbers =  numbers.stream()
+		.map(n -> n*n)
+		.collect(Collectors.toList());
+		System.out.println(squaredNumbers);
+		
+		// sorted
+		List<Integer> sortedNumbers = numbers.stream()
+		.sorted()
+		.collect(Collectors.toList());
+		System.out.println(sortedNumbers);
+		
+		// reduce
+		int sum = numbers.stream()
+		.reduce(0, Integer::sum);
+		System.out.println(sum);
+		
+		
+		
+		
+		
 	}
 }
