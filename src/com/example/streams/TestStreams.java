@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class TestStreams {
 	
@@ -45,8 +47,22 @@ public class TestStreams {
 			transactionIds.add(t.getId());
 		}
 		
-		System.out.println(transactionIds);
+		//Listing2
+//		List<Integer> transactionsIds = 
+//			    transactions.stream()
+//			                .filter(t -> t.getType() == Transaction.GROCERY)
+//			                .sorted(comparing(Transaction::getValue).reversed())
+//			                .map(Transaction::getId)
+//			                .collect(toList());
 		
+		List<Integer> numbers = Arrays.asList(5, 3, 8, 2, 10, 7, 1, 6, 4, 9);
+		
+		// filter
+		List<Integer> evenNumbers = numbers.stream()
+		.filter(n -> n%2 == 0)
+		.collect(Collectors.toList());
+		
+		System.out.println(evenNumbers);
 		
 	}
 }
