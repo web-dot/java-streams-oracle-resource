@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -169,7 +169,18 @@ public class TestStreams {
 		.allMatch(person -> person.getAge() <= 25);
 		System.out.println(allMatch);
 		
+		// noneMatch - checks if none of the elements satisfies the condition
+		boolean noneMatch = people.stream()
+		.noneMatch(person -> person.getAge() <= 25);
+		System.out.println(noneMatch);
 		
+		// findFirst - 
+		Optional<Person> p = people.stream()
+		.findFirst();
+		p.ifPresent(person -> System.out.println(person));
+		
+		// findAny -
+//		people.stream()
 		
 		
 		
