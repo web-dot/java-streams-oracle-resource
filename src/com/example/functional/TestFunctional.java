@@ -65,6 +65,8 @@ public class TestFunctional {
 		Arrays.sort(names, (a, b) -> a.length() - b.length());
 		System.out.println("sorted names(by length using lambda2) : " + Arrays.toString(names));
 		
+		
+		
 		/**
 		 * by passing the functionality(i.e, the comparator or lambda expression) as an
 		 * argument, the `Arrays.sort` method can utilize it to achieve the desired sorting
