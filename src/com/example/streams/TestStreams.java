@@ -8,6 +8,33 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+
 public class TestStreams {
 	
 	
@@ -55,17 +82,20 @@ public class TestStreams {
 //			                .map(Transaction::getId)
 //			                .collect(toList());
 		
-		List<Integer> numbers = Arrays.asList(5, 3, 8, 2, 10, 7, 1, 6, 4, 9);
+		
+		// stream non-terminal operations
+		
+		List<Integer> numbers = Arrays.asList(5, 3, 7, 8, 2, 9, 10, 7, 1, 6, 4, 9);
 		
 		// filter
 		List<Integer> evenNumbers = numbers.stream()
-		.filter(n -> n%2 == 0)
+		.filter(n -> n%2 == 0) // Predicate<T> , test()
 		.collect(Collectors.toList());
 		System.out.println(evenNumbers);
 		
 		// map
 		List<Integer> squaredNumbers =  numbers.stream()
-		.map(n -> n*n)
+		.map(n -> n*n) // Function<T, T> , apply()
 		.collect(Collectors.toList());
 		System.out.println(squaredNumbers);
 		
@@ -77,8 +107,67 @@ public class TestStreams {
 		
 		// reduce
 		int sum = numbers.stream()
-		.reduce(0, Integer::sum);
+		.reduce(0, Integer::sum); // BinaryOperator<T>
 		System.out.println(sum);
+		
+		// distinct
+		List<Integer> distinctNumbers =  numbers.stream()
+		.distinct()
+		.collect(Collectors.toList());
+		System.out.println(distinctNumbers);
+		
+		// limit 
+		List<Integer> limitedNumbers = numbers.stream()
+		.limit(5)
+		.collect(Collectors.toList());
+		System.out.println(limitedNumbers);
+		
+		// skip
+		List<Integer> skippedNumbers = numbers.stream()
+		.skip(3)
+		.collect(Collectors.toList());
+		System.out.println(skippedNumbers);
+		
+		/**
+		 * filter()
+		 * map()
+		 * reduce()
+		 * distinct()
+		 * 
+		 * sorted()
+		 * 
+		 * limit()
+		 * skip()
+		 * 
+		 * 
+		 * */
+		
+		
+		// streams terminal operations
+		
+		List<Person> people  = Arrays.asList(
+				new Person("Alice", 25),
+                new Person("Bob", 30),
+                new Person("Charlie", 35),
+                new Person("Dave", 40),
+                new Person("Eve", 45)
+				);
+		
+		// count
+		long count = people.stream()
+		.count();
+		System.out.println(count);
+		
+		
+		// anyMatch - checks if at least one element satisfies condition 
+		boolean anymatch = people.stream()
+		.anyMatch(person -> person.getAge() <= 25);
+		System.out.println(anymatch);
+		
+		// allMatch - checks if all elements satisfies condition
+		boolean allMatch =  people.stream()
+		.allMatch(person -> person.getAge() <= 25);
+		System.out.println(allMatch);
 		
 		
 		
