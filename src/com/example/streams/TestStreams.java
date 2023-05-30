@@ -180,8 +180,104 @@ public class TestStreams {
 		p.ifPresent(person -> System.out.println(person));
 		
 		// findAny -
-//		people.stream()
+		Optional<Person> anyPerson = people.stream()
+		.findAny();
+		anyPerson.ifPresent(person -> System.out.println(person));
 		
+		// max
+		Optional<Person> maxAgePerson = people.stream()
+		.max((p1, p2) -> p1.getAge() - p2.getAge());
+		maxAgePerson.ifPresent(person -> System.out.println(person));
+		
+		// min
+		Optional<Person> minAgePerson = people.stream()
+		.min((p1, p2) -> p1.getAge() - p2.getAge());
+		minAgePerson.ifPresent(person -> System.out.println(person));
+		
+		
+		// collect
+		List<Person> personsList = people.stream()
+		.filter(person -> person.getAge() > 30 && person.getAge() <= 45)
+		.collect(Collectors.toList());
+		System.out.println(personsList);
+		
+		/**
+		 * next ->
+		 * 
+		 * import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+class Product {
+    private String name;
+    private double price;
+
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                '}';
+    }
+}
+
+public class StreamNonTerminalAndTerminal {
+    public static void main(String[] args) {
+        List<Product> products = Arrays.asList(
+                new Product("Apple", 1.99),
+                new Product("Banana", 0.99),
+                new Product("Orange", 2.49),
+                new Product("Mango", 3.99),
+                new Product("Grapes", 1.49)
+        );
+
+        // Example 1: Filter and forEach
+        products.stream()
+                .filter(product -> product.getPrice() < 2.0)
+                .forEach(System.out::println);
+
+        // Example 2: Map and collect
+        List<String> productNames = products.stream()
+                .map(Product::getName)
+                .collect(Collectors.toList());
+        System.out.println("Product names: " + productNames);
+
+        // Example 3: Sorted and findFirst
+        products.stream()
+                .sorted((p1, p2) -> Double.compare(p2.getPrice(), p1.getPrice()))
+                .findFirst()
+                .ifPresent(product -> System.out.println("Most expensive product: " + product));
+
+        // Example 4: Limit and sum
+        double totalPrice = products.stream()
+                .limit(3)
+                .mapToDouble(Product::getPrice)
+                .sum();
+        System.out.println("Total price of the first 3 products: " + totalPrice);
+
+        // Example 5: Distinct and count
+        long uniquePricesCount = products.stream()
+                .mapToDouble(Product::getPrice)
+                .distinct()
+                .count();
+        System.out.println("Number of unique prices: " + uniquePricesCount);
+    }
+}
+
+		 * */
 		
 		
 	}
