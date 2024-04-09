@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 
@@ -98,6 +99,15 @@ public class TestStreams {
 		.map(n -> n*n) // Function<T, T> , apply()
 		.collect(Collectors.toList());
 		System.out.println(squaredNumbers);
+		
+		
+		numbers.stream()
+		.map(new Function<Integer, Integer>(){
+			@Override
+			public Integer apply(Integer n) {
+				return n*n;
+			}
+		});
 		
 		// sorted
 		List<Integer> sortedNumbers = numbers.stream()
